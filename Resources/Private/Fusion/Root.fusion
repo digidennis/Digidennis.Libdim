@@ -1,0 +1,5 @@
+prototype(Digidennis.Libdim:FileUpload) < prototype(Neos.Neos:Plugin) {
+    package = 'Digidennis.Libdim'
+    controller = 'BinPack'
+    action = 'email'
+}

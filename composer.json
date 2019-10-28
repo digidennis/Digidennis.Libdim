@@ -1,0 +1,18 @@
+{
+    "description": "",
+    "type": "neos-package",
+    "name": "digidennis/libdim",
+    "require": {
+        "neos/flow": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Digidennis\\Libdim\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Digidennis.Libdim"
+        }
+    }
+}

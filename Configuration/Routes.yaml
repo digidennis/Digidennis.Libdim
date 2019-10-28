@@ -1,0 +1,5 @@
+-
+  name: 'BinPack routes'
+  uriPattern: 'binpack/{@action}'
+  defaults:
+    '@controller': 'BinPack'

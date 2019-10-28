@@ -1,0 +1,6 @@
+'Digidennis.Libdim:FileUpload':
+  superTypes:
+    'Neos.Neos:Plugin': TRUE
+  ui:
+    label: 'File Upload'
+    group: 'plugins'

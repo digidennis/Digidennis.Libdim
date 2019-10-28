@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 1em auto;
+        }
+        table{
+            border: 1px solid #333;
+            margin: 1em auto;
+            margin-bottom: 1em;
+            width:75%;
+        }
+        table td{
+            padding: 0.6em;
+            text-align: left;
+            width: 25%;
+        }
+        table td label{
+            display: block;
+        }
+        table.boxes {
+            width:50%;
+            border-collapse: collapse;
+        }
+        table.boxes td{
+            border-bottom: 1px solid #333;
+        }
+        .bin {
+            position: relative;
+            margin: 20px;
+            background: #eee;
+        }
+        .bin .label {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+        .box, .freebox {
+            position: absolute;
+            border: 1px solid white;
+            background: #0a0;
+            box-sizing: border-box;
+        }
+        .freebox{
+            background-color: antiquewhite;
+            border: 3px solid red;
+            opacity:0.3;
+        }
+        .box .box-label, .freebox .box-label  {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <f:form action="adddimensionalunit" controller="BinPack" package="Digidennis.Libdim" >
+        <f:form.hidden name="strategy" value="BoxCushion"></f:form.hidden>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Alm hynde</td>
+                    <td >&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><label for="count">Antal:</label><f:form.textfield type="number" name="count" id="count" value="1" /></td>
+                    <td><label for="label">Label:</label><f:form.textfield name="label" id="label" value="Sæde"/></td>
+                    <td colspan="2"><label for="opirulle">Op i rulle:</label><f:form.checkbox name="config[opirulle]" id="opirulle" value="1" /></td>
+                </tr>
+                <tr>
+                    <td><label for="width">Bredde:</label><f:form.textfield type="number" name="dimensions[width]" id="width" value=""/></td>
+                    <td><label for="depth">Dybde:</label><f:form.textfield type="number" name="dimensions[depth]" id="depth" value=""/></td>
+                    <td colspan="2"><label for="height">Højde:</label><f:form.textfield type="number" name="dimensions[height]" id="height" value=""/></td>
+                </tr>
+                <tr>
+                    <td><label for="underspejl">Underspejl:</label><f:form.checkbox name="config[underspejl]" id="underspejl" value="1" /></td>
+                    <td><label for="spejlkant">Spejlkant:</label><f:form.textfield type="number" name="config[spejlkant]" id="spejlkant" value="0"/></td>
+                    <td><label for="treetbund">Tre-Et Bund:</label><f:form.checkbox name="config[treetbund]" id="treetbund" value="1" /></td>
+                    <td><label for="rotate">Kan roteres:</label><f:form.checkbox name="rotate" id="rotate" value="1" /></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><f:form.submit  value="Opret" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </f:form>
+    <f:form action="adddimensionalunit" controller="BinPack" package="Digidennis.Libdim">
+        <f:form.hidden name="strategy" value="BackWedge"></f:form.hidden>
+        <table>
+            <tbody>
+            <tr>
+                <td colspan="4" align="right">Rygkile</td>
+            </tr>
+            <tr>
+                <td><label for="backwedge_count">Antal:</label><f:form.textfield type="number" name="count" id="backwedge_count" value="1" /></td>
+                <td><label for="backwedge_label">Label:</label><f:form.textfield name="label" id="backwedge_label" value="Ryg"/></td>
+                <td colspan="2"><label for="backwedge_opirulle">Op i rulle:</label><f:form.checkbox name="config[opirulle]" id="backwedge_opirulle" value="1" /></td>
+            </tr>
+            <tr>
+                <td><label for="backwedge_width">Bredde:</label><f:form.textfield type="number" name="dimensions[width]" id="backwedge_width" value=""/></td>
+                <td><label for="backwedge_topdepth">Top Dybde:</label><f:form.textfield type="number" name="dimensions[topdepth]" id="backwedge_topdepth" value=""/></td>
+                <td><label for="backwedge_bottomdepth">Bund Dybde:</label><f:form.textfield type="number" name="dimensions[bottomdepth]" id="backwedge_bottomdepth" value=""/></td>
+                <td><label for="backwedge_height">Højde:</label><f:form.textfield type="number" name="dimensions[height]" id="backwedge_height" value=""/></td>
+            </tr>
+            <tr>
+                <td><label for="backwedge_underspejl">Underspejl:</label><f:form.checkbox name="config[underspejl]" id="backwedge_underspejl" value="1" /></td>
+                <td ><label for="backwedge_underspejlkant">Spejlkant:</label><f:form.textfield type="number" name="config[underspejlkant]" id="backwedge_underspejlkant" value="0"/></td>
+                <td><label for="backwedge_bagspejl">Bagspejl:</label><f:form.checkbox name="config[bagspejl]" id="backwedge_bagspejl" value="1" /></td>
+                <td ><label for="backwedge_bagspejlkant">Spejlkant:</label><f:form.textfield type="number" name="config[bagspejlkant]" id="backwedge_bagspejlkant" value="0"/></td>
+            </tr>
+            <tr>
+                <td ><label for="backwedge_topfront">Top & Front i et:</label><f:form.checkbox name="config[topfront]" id="backwedge_topfront" value="1" /></td>
+                <td colspan="3"><label for="backwedge_rotate">Kan roteres:</label><f:form.checkbox name="rotate" id="backwedge_rotate" value="1" /></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right"><f:form.submit  value="Opret" /></td>
+            </tr>
+            </tbody>
+        </table>
+    </f:form>
+
+    <f:if condition="{helper.dimensionalunits}">
+        <f:form action="removedimensionalunit" controller="BinPack" package="Digidennis.Libdim" >
+            <table class="boxes">
+                <tbody>
+                <f:for each="{helper.dimensionalunits}" as="dimensionalunit" iteration="i">
+                    <tr>
+                        <td><label>Label: </label>{dimensionalunit.label}</td>
+                        <td><label>Dimensioner: </label><f:for each="{dimensionalunit.dimensions}" as="dimension">{dimension} </f:for></td>
+                        <td colspan="2"><label>Kan roteres:</label><span id="rotate"><f:if condition="{dimensionalunit.rotate}"><f:then>Ja</f:then><f:else>Nej</f:else></f:if></span></td>
+                        <td><label><f:for each="{dimensionalunit.config}" as="config" key="configkey">{configkey}: {config} </f:for></label></td>
+                        <td><f:form.submit name="index" id="index" value="{i.index}" /></td>
+                    </tr>
+                </f:for>
+                </tbody>
+            </table>
+        </f:form>
+    </f:if>
+
+    <f:form action="addrect" controller="BinPack" package="Digidennis.Libdim" >
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="count">Antal:</label><f:form.textfield name="count" id="count" value="1" /></td>
+                    <td><label for="width">Vidde:</label><f:form.textfield name="width" id="width" value=""/></td>
+                    <td><label for="height">Højde:</label><f:form.textfield name="height" id="height" value=""/></td>
+                    <td><label for="canrotate">Kan roteres:</label><f:form.checkbox name="canrotate" id="canrotate" value="1"/></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><f:form.submit  value="Opret" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </f:form>
+
+    <f:if condition="{helper.boxes}">
+        <f:form action="removerect" controller="BinPack" package="Digidennis.Libdim" >
+            <table class="boxes">
+                <tbody>
+                <f:for each="{helper.boxes}" as="box" iteration="i">
+                    <f:if condition="{box.packed}"><f:then><tr style="background-color:lightgreen"></f:then><f:else><tr style="background-color:lightcoral"></f:else></f:if>
+                        <td><label for="width">Vidde:</label><span id="width">{box.width}</span></td>
+                        <td><label for="height">Højde:</label><span id="height">{box.height}</span></td>
+                        <td><label for="canrotate">Kan roteres:</label><span id="canrotate"><f:if condition="{box.canRotate}"><f:then>Ja</f:then><f:else>Nej</f:else></f:if></span></td>
+                        <td><f:form.submit name="index" id="index" value="{i.index}" /></td>
+                    </tr>
+                </f:for>
+                </tbody>
+            </table>
+        </f:form>
+    </f:if>
+
+    <f:if condition="{helper.boxes||helper.dimensionalunits}">
+        <f:form action="pack" controller="BinPack" package="Digidennis.Libdim" >
+            <table class="packer">
+                <tbody>
+                    <tr>
+                        <td><label for="width">Vidde:</label><f:form.textfield name="width" id="width" value="{helper.width}"/></td>
+                    </tr>
+                    <tr>
+                        <td><f:form.submit  value="Pak" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </f:form>
+
+        <f:form action="reset" controller="BinPack" package="Digidennis.Libdim" >
+            <table class="packer">
+                <tbody>
+                    <tr>
+                        <td><f:form.submit  value="Nulstil" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </f:form>
+    </f:if>
+
+    <f:if condition="{helper.bin}">
+        <div class="bin" style="width: {helper.bin.width*zoom}px; height: {helper.bin.height*zoom}px; margin: auto">
+            <div>
+                <f:for each="{helper.bin.boxes}" as="box">
+                    <div class="box" style="width: {box.width*zoom}px; height:{box.height*zoom}px; left: {box.x*zoom}px; top: {box.y*zoom}px;">
+                        <span class="box-label">{box.label}</span>
+                    </div>
+                </f:for>
+                <f:for each="{helper.bin.freeboxes}" as="box">
+                    <div class="freebox" style="width: {box.width*zoom}px; height:{box.height*zoom}px; left: {box.x*zoom}px; top: {box.y*zoom}px;">
+                        <span class="box-label">{box.label}</span>
+                    </div>
+                </f:for>
+            </div>
+            <f:if condition="{helper.boxes}"><span class="label">{helper.bin.label}</span></f:if>
+        </div>
+    </f:if>
+
+</div>
+</body>
+</html>
+

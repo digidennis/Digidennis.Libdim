@@ -1,0 +1,14 @@
+privilegeTargets:
+
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+
+    'Digidennis.Libdim:BinPackController.indexAction':
+      matcher: 'method(Digidennis\Libdim\Controller\BinPackController->(index|adddimensionalunit|addrect|removerect|removedimensionalunit|pack|reset|email)Action())'
+
+roles:
+
+  'Neos.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'Digidennis.Libdim:BinPackController.indexAction'
+        permission: GRANT

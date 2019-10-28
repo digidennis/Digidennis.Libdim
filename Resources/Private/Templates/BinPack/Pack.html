@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 1em auto;
+            text-align: center;
+        }
+        .bin {
+            position: relative;
+            margin: 20px;
+            background: #eee;
+        }
+        .bin .label {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+        .box {
+            position: absolute;
+            border: 1px solid white;
+            background: #0a0;
+            box-sizing: border-box;
+        }
+        .box .box-label {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <f:link.action action="index" ><- Tilbage</f:link.action>
+    <f:if condition="{bins}">
+        <f:for each="{bins}" as="bin">
+            <div class="bin" style="width: {bin.width*zoom}px; height: {bin.height*zoom}px;">
+                <div>
+                    <f:for each="{bin.boxes}" as="box">
+                        <div class="box" style="width: {box.width*zoom}px; height:{box.height*zoom}px; left: {box.x*zoom}px; top: {box.y*zoom}px;">
+                            <span class="box-label">{box.label}</span>
+                        </div>
+                    </f:for>
+                </div>
+                <span class="label">{bin.label}</span>
+            </div>
+        </f:for>
+    </f:if>
+</body>
+</html>
